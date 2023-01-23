@@ -38,22 +38,17 @@ functor F (M: ORD_MAP where type Key.ord_key = string) (S:ORD_SET where type Key
                 in
                     !finalMap
                 end
-    end ;
+    end
 
-structure mySet : ORD_SET = ListSetFn (
+structure STR_ORD = 
     struct 
         type ord_key = string
         val compare = String.compare
     end
-);
 
-structure myMap : ORD_MAP = ListMapFn (
-    struct 
-        type ord_key = string
-        val compare = String.compare
-    end
-);
+structure mySet : ORD_SET = ListSetFn (STR_ORD)
+structure myMap : ORD_MAP = ListMapFn (STR_ORD)
 
-structure myStructure = F (myMap) (mySet);
+structure myStructure = F (myMap) (mySet)
 
-myStructure.proc ["a.txt", "b.txt"];
+val test = myStructure.proc ["a.txt", "b.txt"]
